@@ -1,0 +1,75 @@
+import { createElement,
+{{#if hasChildren}}
+    {{#unless childrenAsDangerouslySetInnerHTML}}
+        ReactNode,
+    {{/unless}}
+{{/if}}
+ReactElement } from 'react';
+
+{{#if hasProcessors}}
+    import mjmlAttributesProcessors from '../utils/mjml-attributes-processors';
+{{/if}}
+
+export interface {{component}}Props {
+{{#if hasChildren}}
+    children
+    {{#if childrenAsDangerouslySetInnerHTML}}
+        : string;
+    {{else}}
+        ?: ReactNode; dangerouslySetInnerHTML?: { __html: string; };
+    {{/if}}
+{{/if}}
+{{#if hasClassName}}
+    className?: string;
+{{/if}}
+{{#if hasAttributes}}
+    {{#each allowedAttributes}}
+        {{propName}}?: {{tsType}};
+    {{/each}}
+{{/if}}
+};
+
+const {{component}} = ({
+{{#if hasChildren}}
+    children,
+    {{#unless childrenAsDangerouslySetInnerHTML}}
+        dangerouslySetInnerHTML,
+    {{/unless}}
+{{/if}}
+{{#if hasClassName}}
+    className,
+{{/if}}
+{{#each allowedAttributes}}
+    {{propName}},
+{{/each}}
+}: {{component}}Props): ReactElement => createElement( '{{componentName}}', {
+{{#if hasClassName}}
+    'css-class': className,
+{{/if}}
+{{#if hasChildren}}
+    dangerouslySetInnerHTML{{#if childrenAsDangerouslySetInnerHTML}}: { __html: children }{{/if}},
+{{/if}}
+{{#each allowedAttributes}}
+    '{{attr}}':
+    {{#if isStringType}}
+        {{propName}},
+    {{else}}
+        {{#if boolToAttr}}
+            {{propName}}
+            ? '{{attr}}' : undefined,
+        {{else}}
+            typeof
+            {{propName}}
+            !== 'undefined' ? mjmlAttributesProcessors.{{processor}}({{propName}}) : undefined,
+        {{/if}}
+    {{/if}}
+{{/each}}
+}
+{{#if hasChildren}}
+    {{#unless childrenAsDangerouslySetInnerHTML}}
+        , children
+    {{/unless}}
+{{/if}}
+);
+
+export default {{component}};
