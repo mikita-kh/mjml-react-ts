@@ -228,12 +228,12 @@ components
         data.hasAttributes = data.allowedAttributes.length > 0;
         data.hasProcessors = data.allowedAttributes.some((attr) => !attr.isStringType && !attr.boolToAttr);
 
-        writeFileSync(`${__dirname}/../src/components/${componentName}.tsx`, render(data));
+        writeFileSync(`${rootDir}/src/components/${componentName}.tsx`, render(data));
     });
 
 ((componentName) => {
     writeFileSync(
-        `${__dirname}/../src/components/${componentName}.tsx`,
+        `${rootDir}/src/components/${componentName}.tsx`,
         render({
             componentName,
             component: pascalCase(componentName),
@@ -257,7 +257,7 @@ components
 
 ((componentName) => {
     writeFileSync(
-        `${__dirname}/../src/components/${componentName}.tsx`,
+        `${rootDir}/src/components/${componentName}.tsx`,
         render({
             componentName,
             component: pascalCase(componentName),
@@ -289,7 +289,7 @@ components
 })('mjml');
 
 writeFileSync(
-    `${__dirname}/../src/index.ts`,
+    `${rootDir}/src/index.ts`,
     [{ componentName: 'mjml' }, { componentName: 'mj-all' }, ...components.flatMap(([, all]) => all)]
         .flatMap(({ componentName }) => [
             `export type { ${pascalCase(componentName)}Props } from './components/${componentName}';`,
