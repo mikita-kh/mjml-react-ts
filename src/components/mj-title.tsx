@@ -1,17 +1,9 @@
 import { createElement, ReactElement, ReactNode } from 'react';
 
 export interface MjTitleProps {
-    children?: ReactNode;
-    dangerouslySetInnerHTML?: { __html: string };
+  children?: ReactNode;
 }
 
-const MjTitle = ({ children, dangerouslySetInnerHTML }: MjTitleProps): ReactElement =>
-    createElement(
-        'mj-title',
-        {
-            dangerouslySetInnerHTML,
-        },
-        children,
-    );
+const MjTitle = ({ children }: MjTitleProps): ReactElement => createElement('mj-title', {}, children);
 
 export default MjTitle;

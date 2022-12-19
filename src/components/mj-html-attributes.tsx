@@ -1,17 +1,9 @@
 import { createElement, ReactElement, ReactNode } from 'react';
 
 export interface MjHtmlAttributesProps {
-    children?: ReactNode;
-    dangerouslySetInnerHTML?: { __html: string };
+  children?: ReactNode;
 }
 
-const MjHtmlAttributes = ({ children, dangerouslySetInnerHTML }: MjHtmlAttributesProps): ReactElement =>
-    createElement(
-        'mj-html-attributes',
-        {
-            dangerouslySetInnerHTML,
-        },
-        children,
-    );
+const MjHtmlAttributes = ({ children }: MjHtmlAttributesProps): ReactElement => createElement('mj-html-attributes', {}, children);
 
 export default MjHtmlAttributes;

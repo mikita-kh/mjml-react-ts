@@ -2,6 +2,7 @@
 import camelCase from 'camelCase';
 import { opendirSync, readFileSync, writeFileSync } from 'fs';
 import handlebars from 'handlebars';
+// @ts-ignore
 import mjmlCoreTypes from 'mjml-core/lib/types';
 import pascalCase from 'pascalcase';
 import { join, resolve } from 'path';
@@ -38,12 +39,14 @@ interface RenderData {
     }>;
 }
 
+const cloneRegex = (input: RegExp) => new RegExp(input.source, input.flags)
+
 const mjmlTypes = Object.keys(mjmlCoreTypes) as Array<keyof typeof mjmlCoreTypes>;
 
 function parseTypeConfig(typeConfig: string) {
     let tsType = 'string';
     let processor: AttributeProcessor = 'string';
-    const mjmlType = mjmlTypes.find((type) => mjmlCoreTypes[type].matcher.exec(typeConfig));
+    const mjmlType = mjmlTypes.find((type) => cloneRegex(mjmlCoreTypes[type].matcher).exec(typeConfig));
 
     if (mjmlType === 'integer') {
         tsType = 'number';
@@ -72,6 +75,7 @@ function parseTypeConfig(typeConfig: string) {
         }
 
         if (args[1] > 1) {
+            const unitType = [...types].join("|");
             const length = +args[1];
             let i = -1;
 
@@ -79,7 +83,7 @@ function parseTypeConfig(typeConfig: string) {
             while (++i < length) {
                 types.push(
                     `[${Array(i + 1)
-                        .fill('number')
+                        .fill(unitType)
                         .join(', ')}]`,
                 );
             }
@@ -227,6 +231,10 @@ components
         data.hasClassName = !!componentsWithCssClass[componentName];
         data.hasAttributes = data.allowedAttributes.length > 0;
         data.hasProcessors = data.allowedAttributes.some((attr) => !attr.isStringType && !attr.boolToAttr);
+
+        if (componentName === 'mj-accordion') {
+          console.log(data);
+        }
 
         writeFileSync(`${rootDir}/src/components/${componentName}.tsx`, render(data));
     });

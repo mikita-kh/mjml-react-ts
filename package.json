@@ -1,117 +1,130 @@
 {
-    "name": "@humans-email-kit/react-mjml",
-    "version": "1.0.0",
-    "description": "",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "author": "Mikita Khatsimtsou<nikita.mmf@gmail.com>",
-    "license": "MIT",
-    "publishConfig": {
-        "access": "public"
+  "name": "@humans-email-kit/react-mjml",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Mikita Khatsimtsou<nikita.mmf@gmail.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "generate": "ts-node-cwd scripts/generate.ts",
+    "postgenerate": "yarn lint:fix",
+    "prebuild": "yarn clean",
+    "build": "tsc --build -verbose",
+    "lint": "eslint src --ext ts,tsx",
+    "lint:fix": "yarn lint --fix",
+    "lint:ci": "yarn lint --quiete",
+    "clean": "rimraf dist",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "mjml": "4.13.0",
+    "mjml-core": "4.13.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.3",
+    "@types/node": "^16.18.9",
+    "@types/pascalcase": "^1.0.1",
+    "@types/prettier": "^2.7.1",
+    "@types/react": "^18.0.26",
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "@typescript-eslint/parser": "^5.46.1",
+    "camelcase": "^6.3.0",
+    "dot": "^1.1.3",
+    "ejs": "^3.1.8",
+    "eslint": "^8.29.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "handlebars": "^4.7.7",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
+    "pascalcase": "^1.0.0",
+    "prettier": "^2.8.1",
+    "rimraf": "^3.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": "./tsconfig.json"
     },
-    "scripts": {
-        "generate": "ts-node-cwd scripts/generate.ts",
-        "postgenerate": "yarn lint:fix",
-        "prebuild": "yarn clean",
-        "build": "tsc --build -verbose",
-        "lint": "eslint src --ext ts,tsx",
-        "lint:fix": "yarn lint --fix",
-        "lint:ci": "yarn lint --quiete",
-        "clean": "rimraf dist",
-        "prepare": "husky install"
-    },
-    "dependencies": {
-        "mjml": "4.10.2",
-        "mjml-core": "4.10.2",
-        "react": "^17.0.0",
-        "react-dom": "^17.0.0"
-    },
-    "devDependencies": {
-        "@types/node": "^14.0.11",
-        "@types/prettier": "^2.3.2",
-        "@types/react": "^17.0.15",
-        "@typescript-eslint/eslint-plugin": "^4.28.4",
-        "@typescript-eslint/parser": "^4.28.4",
-        "camelcase": "^6.0.0",
-        "eslint": "^7.5.0",
-        "eslint-config-airbnb-typescript": "^12.3.1",
-        "eslint-config-prettier": "^8.3.0",
-        "eslint-plugin-import": "^2.22.0",
-        "eslint-plugin-jsx-a11y": "^6.3.1",
-        "eslint-plugin-prettier": "^3.4.0",
-        "eslint-plugin-react": "^7.20.3",
-        "eslint-plugin-react-hooks": "^4.0.8",
-        "eslint-plugin-simple-import-sort": "^7.0.0",
-        "handlebars": "^4.7.6",
-        "husky": ">=6",
-        "lint-staged": "^11.1.1",
-        "pascalcase": "^1.0.0",
-        "prettier": "^2.3.2",
-        "rimraf": "^3.0.0",
-        "ts-node": "^10.1.0",
-        "typescript": "^4.3.5"
-    },
-    "eslintConfig": {
-        "parser": "@typescript-eslint/parser",
-        "parserOptions": {
-            "project": "./tsconfig.json"
-        },
-        "extends": [
-            "airbnb-typescript",
-            "plugin:@typescript-eslint/recommended-requiring-type-checking",
-            "prettier"
-        ],
-        "plugins": [
-            "@typescript-eslint",
-            "simple-import-sort",
-            "prettier"
-        ],
-        "rules": {
-            "prettier/prettier": "error",
-            "simple-import-sort/exports": "error",
-            "simple-import-sort/imports": [
-                "error",
-                {
-                    "groups": [
-                        [
-                            "^react.*",
-                            "^[a-zA-Z].*"
-                        ],
-                        [
-                            "^@(.*|$)"
-                        ],
-                        [
-                            "^\\.\\.(?!/?$)",
-                            "^\\.\\./?$"
-                        ],
-                        [
-                            "^\\./(?=.*/)(?!/?$)",
-                            "^\\.(?!/?$)",
-                            "^\\./?$"
-                        ]
-                    ]
-                }
-            ]
-        }
-    },
-    "eslintIgnore": [
-        "node_modules",
-        "dist"
+    "extends": [
+      "eslint:recommended",
+      "plugin:import/recommended",
+      "plugin:react/recommended",
+      "plugin:import/typescript",
+      "plugin:react-hooks/recommended",
+      "plugin:@typescript-eslint/recommended",
+      "prettier"
     ],
-    "prettier": {
-        "tabWidth": 4,
-        "useTabs": false,
-        "semi": true,
-        "arrowParens": "always",
-        "bracketSpacing": true,
-        "endOfLine": "lf",
-        "jsxBracketSameLine": false,
-        "jsxSingleQuote": false,
-        "singleQuote": true,
-        "printWidth": 140,
-        "trailingComma": "all"
+    "plugins": [
+      "@typescript-eslint",
+      "simple-import-sort",
+      "prettier"
+    ],
+    "rules": {
+      "object-shorthand": ["error", "always"],
+      "prettier/prettier": "error",
+      "simple-import-sort/exports": "error",
+      "simple-import-sort/imports": [
+        "error",
+        {
+          "groups": [
+            [
+              "^react.*",
+              "^[a-zA-Z].*"
+            ],
+            [
+              "^@(.*|$)"
+            ],
+            [
+              "^\\.\\.(?!/?$)",
+              "^\\.\\./?$"
+            ],
+            [
+              "^\\./(?=.*/)(?!/?$)",
+              "^\\.(?!/?$)",
+              "^\\./?$"
+            ]
+          ]
+        }
+      ]
     },
-    "lint-staged": {
-        "src/**/*.{ts,tsx}": "eslint --cache --fix"
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
     }
+  },
+  "eslintIgnore": [
+    "node_modules",
+    "dist"
+  ],
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "endOfLine": "lf",
+    "jsxBracketSameLine": false,
+    "jsxSingleQuote": false,
+    "singleQuote": true,
+    "printWidth": 140,
+    "trailingComma": "all"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": "eslint --cache --fix"
+  }
 }

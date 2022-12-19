@@ -15,6 +15,4 @@ declare module 'mjml-core/lib/types' {
 declare module 'camelcase' {
     export default function (s: string): string;
 }
-declare module 'pascalcase' {
-    export default function (s: string): string;
-}
+

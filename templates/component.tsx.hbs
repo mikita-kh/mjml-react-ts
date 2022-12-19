@@ -16,7 +16,7 @@ export interface {{component}}Props {
     {{#if childrenAsDangerouslySetInnerHTML}}
         : string;
     {{else}}
-        ?: ReactNode; dangerouslySetInnerHTML?: { __html: string; };
+        ?: ReactNode;
     {{/if}}
 {{/if}}
 {{#if hasClassName}}
@@ -32,9 +32,6 @@ export interface {{component}}Props {
 const {{component}} = ({
 {{#if hasChildren}}
     children,
-    {{#unless childrenAsDangerouslySetInnerHTML}}
-        dangerouslySetInnerHTML,
-    {{/unless}}
 {{/if}}
 {{#if hasClassName}}
     className,
@@ -47,7 +44,7 @@ const {{component}} = ({
     'css-class': className,
 {{/if}}
 {{#if hasChildren}}
-    dangerouslySetInnerHTML{{#if childrenAsDangerouslySetInnerHTML}}: { __html: children }{{/if}},
+  {{#if childrenAsDangerouslySetInnerHTML}}dangerouslySetInnerHTML: { __html: children },{{/if}}
 {{/if}}
 {{#each allowedAttributes}}
     '{{attr}}':

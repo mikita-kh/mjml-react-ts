@@ -1,19 +1,19 @@
 {
-    "extends": "ts-node/node12/tsconfig.json",
-    "ts-node": {
-        "files": true,
-        "compilerOptions": {
-            "rootDir": ".",
-            "resolveJsonModule": true
-        }
-    },
+  "extends": "@tsconfig/node16/tsconfig.json",
+  "ts-node": {
+    "files": true,
     "compilerOptions": {
-        "outDir": "./dist",
-        "rootDir": "./src",
-        "types": ["node"],
-        "declaration": true,
-        "jsx": "react-jsx"
-    },
-    "include": ["src", "types.d.ts"],
-    "exclude": ["**/node_modules/**"]
+      "rootDir": ".",
+      "resolveJsonModule": true
+    }
+  },
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "types": ["node"],
+    "declaration": true,
+    "jsx": "react-jsx"
+  },
+  "include": ["src", "types.d.ts"],
+  "exclude": ["**/node_modules/**"]
 }

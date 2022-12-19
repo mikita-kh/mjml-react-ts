@@ -1,17 +1,17 @@
 import { createElement, ReactElement, ReactNode } from 'react';
 
 export interface MjRawProps {
-    children?: ReactNode;
-    dangerouslySetInnerHTML?: { __html: string };
+  children?: ReactNode;
+  position?: 'file-start';
 }
 
-const MjRaw = ({ children, dangerouslySetInnerHTML }: MjRawProps): ReactElement =>
-    createElement(
-        'mj-raw',
-        {
-            dangerouslySetInnerHTML,
-        },
-        children,
-    );
+const MjRaw = ({ children, position }: MjRawProps): ReactElement =>
+  createElement(
+    'mj-raw',
+    {
+      position,
+    },
+    children,
+  );
 
 export default MjRaw;
